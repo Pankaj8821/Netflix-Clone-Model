@@ -33,11 +33,11 @@ jobs:
         run: npm install
 
       # 2 Setup JDK (SonarQube Scanner needs Java)
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+      # - name: Setup JDK
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     distribution: temurin
+      #     java-version: '17'
       # #  SonarQube Analysis
       # - name: SonarQube Analysis
       #   uses: SonarSource/sonarcloud-github-action@master
