@@ -48,12 +48,14 @@ jobs:
         with:
           name: dependency-check-report
           path: reports
-
+       #  Setup Trivy
+      - name: Setup Trivy
+        uses: aquasecurity/setup-trivy@v0.20.0
       # -------- Trivy --------
-      - name: Install Trivy
-        uses: aquasecurity/trivy-action@master
-        with:
-          version: latest
+      # - name: Install Trivy
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     version: latest
 
       - name: Trivy FS Scan
         run: trivy fs --exit-code 0 --severity HIGH,CRITICAL .
