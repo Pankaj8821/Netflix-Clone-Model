@@ -105,14 +105,15 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: Docker Scout Analyze FS
-        run: docker scout cves .
+      # 5️⃣ Generate SBOM
+      - name: Generate Docker SBOM
+        uses: docker/scout-action@v1
+        with:
+          command: sbom
+          image: ${{ env.REPO_IMAGE }}
 
-      - name: Docker Scout Image Scan
-        run: docker scout cves $REPO_IMAGE
 
-      - name: Docker Scout SBOM
-        run: docker scout sbom $REPO_IMAGE
+
 
   
 
