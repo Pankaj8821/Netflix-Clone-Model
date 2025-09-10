@@ -88,13 +88,19 @@ jobs:
           docker tag $REPO_IMAGE $REPO_IMAGE_LATEST
           docker push $REPO_IMAGE_LATEST
 
-      # -------- Docker Scout --------
+      # # -------- Docker Scout --------
+      # - name: Install Docker Scout
+      #   run: |
+      #        mkdir -p ~/.docker/cli-plugins
+      #        curl -sSfL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins
+      #        chmod +x ~/.docker/cli-plugins/docker-scout
+      #        docker scout version
       - name: Install Docker Scout
         run: |
-             mkdir -p ~/.docker/cli-plugins
-             curl -sSfL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins
-             chmod +x ~/.docker/cli-plugins/docker-scout
-             docker scout version
+          mkdir -p ~/.docker/cli-plugins
+          curl -sSL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64 -o ~/.docker/cli-plugins/docker-scout
+          chmod +x ~/.docker/cli-plugins/docker-scout
+          docker scout version
 
 
       - name: Docker Scout Analyze FS
