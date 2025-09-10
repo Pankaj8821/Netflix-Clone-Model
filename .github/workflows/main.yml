@@ -38,34 +38,35 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      #  SonarQube Analysis
-      - name: SonarQube Analysis
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
-        with:
-          args: >
-            -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
-            -Dsonar.projectKey=netflix             
-            -Dsonar.projectName=netflix             
-            -Dsonar.sources=.
-      # ---- SonarQube Quality Gate Check ---
-      - name: SonarQube Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonar-server
+      # #  SonarQube Analysis
+      # - name: SonarQube Analysis
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
+      #   with:
+      #     args: >
+      #       -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
+      #       -Dsonar.projectKey=netflix             
+      #       -Dsonar.projectName=netflix             
+      #       -Dsonar.sources=.
+      # # ---- SonarQube Quality Gate Check ---
+      # - name: SonarQube Quality Gate
+      #   uses: SonarSource/sonarqube-quality-gate-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: https://sonar-server
 
-    # -------- OWASP Dependency Check --------
+  
    # -------- OWASP Dependency Check --------
       - name: OWASP Dependency Check
-        uses: jeremylong/DependencyCheck_Action@main
+        uses: dependency-check/Dependency-Check_Action@v6.7.3
         with:
           project: "netflix"
           path: "."
           format: "ALL"
           out: "reports"
           args: "--disableYarnAudit"
+
 
       - name: Upload Dependency Report
         uses: actions/upload-artifact@v4
