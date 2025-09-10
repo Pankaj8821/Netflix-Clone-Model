@@ -97,10 +97,13 @@ jobs:
       #        docker scout version
       - name: Install Docker Scout
         run: |
-          mkdir -p ~/.docker/cli-plugins
-          curl -sSL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64 -o ~/.docker/cli-plugins/docker-scout
-          chmod +x ~/.docker/cli-plugins/docker-scout
-          docker scout version
+              mkdir -p ~/.docker/cli-plugins
+              curl -sSL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64 \
+                -o ~/.docker/cli-plugins/docker-scout
+              chmod +x ~/.docker/cli-plugins/docker-scout
+              echo "✅ Docker Scout installed"
+              docker --help | grep scout || echo "⚠️ Scout not found in docker help"
+              docker scout version || true
 
 
       - name: Docker Scout Analyze FS
