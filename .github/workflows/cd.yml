@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT_TOKEN }} # personal access token or PAT with repo write access
+          token: ${{ secrets.GIT_TOKEN }} # personal access token or PAT with repo write access
 
       - name: Verify Docker Image Tags
         run: |
