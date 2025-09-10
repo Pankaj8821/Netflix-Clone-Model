@@ -59,13 +59,14 @@ jobs:
   
    # -------- OWASP Dependency Check --------
       - name: OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@v6.7.3
+        uses: dependency-check/Dependency-Check_Action@main
         with:
-          project: "netflix"
-          path: "."
-          format: "ALL"
-          out: "reports"
-          args: "--disableYarnAudit"
+         project: "netflix"
+         path: "."
+         format: "ALL"
+         out: "reports"
+         args: "--disableYarnAudit"
+
 
 
       - name: Upload Dependency Report
