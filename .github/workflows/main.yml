@@ -95,16 +95,14 @@ jobs:
       #        curl -sSfL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins
       #        chmod +x ~/.docker/cli-plugins/docker-scout
       #        docker scout version
-      - name: Install Docker Scout
-        run: |
-          mkdir -p ~/.docker/cli-plugins
-          curl -sSL https://github.com/docker/scout-cli/releases/latest/download/docker-scout_linux_amd64.tar.gz \
-            -o docker-scout.tar.gz
-          tar -xzf docker-scout.tar.gz
-          mv docker-scout ~/.docker/cli-plugins/docker-scout
-          chmod +x ~/.docker/cli-plugins/docker-scout
-          echo "✅ Docker Scout installed"
-          docker scout version
+      - name: Run Docker Scout CVEs analysis
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ env.REPO_IMAGE }}
+          only-severities: critical,high
+          only-fixed: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Docker Scout Analyze FS
