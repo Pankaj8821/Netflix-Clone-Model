@@ -132,7 +132,7 @@ jobs:
       - name: Trigger CD Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: "cd.yml"
+          workflow: "CD - Update Kubernetes Manifests"
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
           inputs: |
