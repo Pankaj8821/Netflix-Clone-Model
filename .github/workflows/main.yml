@@ -31,8 +31,7 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-      - name: Setup Yarn v1
-        run: npm install -g yarn@1
+    
 
       # -------- OWASP Dependency Check --------
       - name: OWASP Dependency Check
@@ -42,6 +41,7 @@ jobs:
           path: "."
           format: "ALL"
           out: "reports"
+          args: "--disableYarnAudit"
 
       - name: Upload Dependency Report
         uses: actions/upload-artifact@v4
