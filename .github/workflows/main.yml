@@ -31,7 +31,30 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-    
+
+      # 2 Setup JDK (SonarQube Scanner needs Java)
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      # #  SonarQube Analysis
+      # - name: SonarQube Analysis
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
+      #   with:
+      #     args: >
+      #       -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
+      #       -Dsonar.projectKey=netflix             
+      #       -Dsonar.projectName=netflix             
+      #       -Dsonar.sources=.
+      # # ---- SonarQube Quality Gate Check ---
+      # - name: SonarQube Quality Gate
+      #   uses: SonarSource/sonarqube-quality-gate-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: https://sonar-server
 
       # -------- OWASP Dependency Check --------
       - name: OWASP Dependency Check
@@ -88,13 +111,7 @@ jobs:
           docker tag $REPO_IMAGE $REPO_IMAGE_LATEST
           docker push $REPO_IMAGE_LATEST
 
-      # # -------- Docker Scout --------
-      # - name: Install Docker Scout
-      #   run: |
-      #        mkdir -p ~/.docker/cli-plugins
-      #        curl -sSfL https://github.com/docker/scout-cli/releases/download/v1.18.3/docker-scout_linux_amd64.tar.gz | tar -xz -C ~/.docker/cli-plugins
-      #        chmod +x ~/.docker/cli-plugins/docker-scout
-      #        docker scout version
+      # Docker Generate Scout CVEs
       - name: Run Docker Scout CVEs analysis
         uses: docker/scout-action@v1
         with:
@@ -105,7 +122,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
 
-      # 5️⃣ Generate SBOM
+      #  Generate  Docker Scout SBOM
       - name: Generate Docker SBOM
         uses: docker/scout-action@v1
         with:
