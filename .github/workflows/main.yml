@@ -49,8 +49,12 @@ jobs:
           name: dependency-check-report
           path: reports
        #  Setup Trivy
-      - name: Setup Trivy
-        uses: aquasecurity/setup-trivy@v0.20.0
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.4
+        with:
+         version: v0.66.0   # Optional: pin to a specific Trivy version
+         cache: true        # Optional: enable caching
+
       # -------- Trivy --------
       # - name: Install Trivy
       #   uses: aquasecurity/trivy-action@master
