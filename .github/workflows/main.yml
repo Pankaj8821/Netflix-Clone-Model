@@ -132,10 +132,14 @@ jobs:
       - name: Trigger CD Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow:  "cd.yml"
+          workflow: "cd.yml"
+          ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
           inputs: |
-            REPO_IMAGE=${{ env.REPO_IMAGE }}
-            IMAGE_NAME=${{ env.IMAGE_NAME }}
+            {
+              "REPO_IMAGE": "${{ env.REPO_IMAGE }}",
+              "IMAGE_NAME": "${{ env.IMAGE_NAME }}"
+            }
+
 
 
