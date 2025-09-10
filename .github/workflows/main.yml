@@ -134,7 +134,7 @@ jobs:
         with:
           workflow: "CD - Update Kubernetes Manifests"
           ref: main
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           inputs: |
             {
               "REPO_IMAGE": "${{ env.REPO_IMAGE }}",
