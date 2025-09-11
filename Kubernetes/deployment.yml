@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: netflix-app
-        image: shailesh49/netflix:381
+        image: shailesh49/netflix:382
         ports:
         - containerPort: 80
