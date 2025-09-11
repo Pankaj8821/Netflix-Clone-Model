@@ -62,7 +62,6 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         env:
            JAVA_HOME: ""
-           PATH: ""
         with:
          project: "netflix"
          path: "."
@@ -76,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
-          path: reports
+          path: reports/**
        # Build Docker Images 
       - name: Build Docker Image
         run: docker build -t ${{ env.REPO_IMAGE }} .
