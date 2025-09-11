@@ -32,6 +32,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+         # -------- OWASP Dependency Check --------
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+         project: "netflix"
+         path: "."
+         format: "ALL"
+         out: "reports"
+         args: "--disableYarnAudit"
+
       # 2 Setup JDK (SonarQube Scanner needs Java)
       # - name: Setup JDK
       #   uses: actions/setup-java@v4
@@ -60,8 +70,6 @@ jobs:
    # -------- OWASP Dependency Check --------
       - name: OWASP Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
-        env:
-           JAVA_HOME: ""
         with:
          project: "netflix"
          path: "."
