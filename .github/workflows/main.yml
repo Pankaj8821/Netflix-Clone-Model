@@ -42,15 +42,11 @@ jobs:
          out: "reports"
          args: "--disableYarnAudit"
 
-         # -------- OWASP Dependency Check --------
-      - name: OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
+      - name: Upload Dependency Report
+        uses: actions/upload-artifact@v4
         with:
-         project: "netflix"
-         path: "."
-         format: "ALL"
-         out: "reports"
-         args: "--disableYarnAudit"
+          name: dependency-check-report
+          path: reports/**
 
 
       # 2 Setup JDK (SonarQube Scanner needs Java)
