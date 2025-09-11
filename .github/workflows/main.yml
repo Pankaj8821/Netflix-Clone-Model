@@ -90,14 +90,20 @@ jobs:
       #     version: latest
 
       - name: Trivy FS Scan
-        run: trivy fs --exit-code 0 --severity HIGH,CRITICAL .
+        run: trivy fs --exit-code 0 --severity HIGH,CRITICAL --format json --output reports/trivy-fs.json .
 
       # - name: Trivy Image Scan (Docker Image)
       #   run: trivy image --exit-code 0 --no-progress ${{ env.REPO_IMAGE }}
 
         # Optional: Fail on high/critical vulnerabilities
       - name: Trivy Image Scan (fail on HIGH/CRITICAL)
-        run: trivy image --exit-code 1 --severity HIGH,CRITICAL ${{ env.REPO_IMAGE }}
+        run: trivy image --exit-code 1 --severity HIGH,CRITICAL --format json --output reports/trivy-image.json ${{ env.REPO_IMAGE }}
+
+      - name: Upload Trivy Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-reports
+          path: reports/trivy-*.json
 
       # -------- Docker Build & Push --------
       - name: Log in to DockerHub
@@ -121,6 +127,7 @@ jobs:
           image: ${{ env.REPO_IMAGE }}
           only-severities: critical,high
           only-fixed: true
+          output: reports/docker-scout-cves.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
 
@@ -130,13 +137,42 @@ jobs:
         with:
           command: sbom
           image: ${{ env.REPO_IMAGE }}
+          output: reports/docker-scout-sbom.json
+      # 
+      - name: Upload Docker Scout Reports
+        uses: actions/upload-artifact@v3
+        with:
+         name: docker-scout-reports
+         path: reports/docker-scout-*.json
 
+      # # -------- Email Security Reports --------
+      # - name: Send Security Reports via Email
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: ${{ secrets.EMAIL_USER }}
+      #     password: ${{ secrets.EMAIL_PASS }}
+      #     subject: "Security Reports - Netflix CI Run #${{ github.run_number }}"
+      #     to: "your-email@example.com"
+      #     from: "GitHub CI <${{ secrets.EMAIL_USER }}>"
+      #     body: |
+      #       Hi Team,
 
+      #       Please find attached the security reports generated in this CI run:
 
+      #       - Dependency Check (OWASP)
+      #       - Trivy (FS + Image)
+      #       - Docker Scout (CVEs + SBOM)
 
-  
+      #       Regards,  
+      #       GitHub Actions CI
+      #     attachments: |
+      #       reports/dependency-check/*
+      #       reports/trivy-*.json
+      #       reports/docker-scout-*.json
 
-      # -------- Cleanup --------
+     # -------- Cleanup --------
       - name: Cleanup Docker Images
         run: |
           docker rmi $IMAGE_NAME || true
