@@ -15,7 +15,7 @@
 </div>
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Table o  f Contents</summary>
   <ol>
     <li>
       <a href="#prerequests">Prerequests</a>
