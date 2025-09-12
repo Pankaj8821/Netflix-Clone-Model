@@ -3,7 +3,7 @@
     <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
   </a>
 
-  <h3 align="center">Netflix Clone</h3>
+  <h3 align="center">Netflix my file 11111111111111111111111111111111111  </h3>
 
   <p align="center">
     <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo</a>
@@ -21,7 +21,7 @@
       <a href="#prerequests">Prerequests</a>
     </li>
     <li>
-      <a href="#which-features-this-project-deals-with">Which features this project deals with</a>
+      <a href="#which-features-this-project-deals-with">Which  shailesh  features this  shaileshproject deals with</a>
     </li>
     <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
     <li>
