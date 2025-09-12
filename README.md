@@ -10,7 +10,7 @@
     ·
     <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Report   Bug</a>
     ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request Feature</a>
+    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request    Feature</a>
   </p>
 </div>
 
