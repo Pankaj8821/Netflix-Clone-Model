@@ -3,12 +3,12 @@
     <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
   </a>
 
-  <h3 align="center">Netflix my file 111 </h3>
+  <h3 align="center">Netflix my file pratik pratik </h3>
 
   <p align="center">
-    <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo</a>
+    <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo aaaaaaaaaaaaaaaaaa</a>
     ·
-    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Rep   Bug</a>
+    <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Rep   vvvvvvvvvvvvvvvBug</a>
     ·
     <a href="https://github.com/crazy-man22/netflix-clone-react-typescript/issues">Request    Feature</a>
   </p>
