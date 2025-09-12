@@ -1,11 +1,11 @@
 name: CD - Update Kubernetes Manifests
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'Kubernetes/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'Kubernetes/**'
   workflow_dispatch:
     inputs:
       REPO_IMAGE:
