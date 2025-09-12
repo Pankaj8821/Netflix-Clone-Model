@@ -34,9 +34,9 @@
 
 <div align="center">
   <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Home Page</p>
+  <p align="center">Home Page 111</p>
   <img src="./public/assets/mini-portal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Mini Portal</p>
+  <p align="center">Mini Portal11111</p>
   <img src="./public/assets/detail-modal.png" alt="Logo" width="100%" height="100%">
   <p align="center">Detail Modal</p>
   <img src="./public/assets/grid-genre.png" alt="Logo" width="100%" height="100%">
