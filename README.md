@@ -21,7 +21,7 @@
       <a href="#prerequests">Prerequests</a>
     </li>
     <li>
-      <a href="#which-features-this-project-deals-with">Which  shailesh  features this  shaileshproject deals with</a>
+      <a href="#which-features-this-project-deals-with">Which  shailesh  features this cvbcgfgfgfgdgdgdgdgdgdg shaileshproject deals with</a>
     </li>
     <li><a href="#third-party-libraries-used-except-for-react-and-rtk">Third Party libraries used except for React and RTK</a></li>
     <li>
@@ -34,9 +34,9 @@
 
 <div align="center">
   <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Home Page</p>
+  <p align="center">Home Page 111</p>
   <img src="./public/assets/mini-portal.png" alt="Logo" width="100%" height="100%">
-  <p align="center">Mini Portal</p>
+  <p align="center">Mini Portal11111</p>
   <img src="./public/assets/detail-modal.png" alt="Logo" width="100%" height="100%">
   <p align="center">Detail Modal</p>
   <img src="./public/assets/grid-genre.png" alt="Logo" width="100%" height="100%">
