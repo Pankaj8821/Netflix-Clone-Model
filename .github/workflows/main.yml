@@ -17,8 +17,8 @@ permissions:
 
 env:
   IMAGE_NAME: netflix:${{ github.run_number }}
-  REPO_IMAGE: pankaj6262/netflix:${{ github.run_number }}
-  REPO_IMAGE_LATEST: pankaj6262/netflix:latest
+  REPO_IMAGE: pankaj6262/mynetflix:${{ github.run_number }}
+  REPO_IMAGE_LATEST: pankaj6262/mynetflix:latest
   DOCKER_SCOUT_CACHE_DIR: /tmp/docker-scout-cache
   SCOUT_BIN: ${{ github.workspace }}/.scout-bin
 
