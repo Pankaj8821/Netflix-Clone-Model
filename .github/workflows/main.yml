@@ -65,28 +65,22 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      
+
       - name: Install SonarScanner CLI
         run: |
+          # cleanup any old/corrupt sonar-scanner install
+          rm -rf $HOME/sonar-scanner-*
+          
+          # download fresh SonarScanner
           curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
           unzip -o sonar-scanner.zip -d $HOME
-          export SONAR_SCANNER_HOME=$HOME/sonar-scanner-5.0.1.3006-linux
-          echo "$SONAR_SCANNER_HOME/bin" >> $GITHUB_PATH
+          
+          # add sonar-scanner to PATH
+          echo "$HOME/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
       
       - name: Check SonarScanner Version
-        run: sonar-scanner --version || true
+        run: sonar-scanner --version
       
-      # - name: Run SonarQube Scan
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #   run: |
-      #     sonar-scanner \
-      #       -Dsonar.host.url=http://103.142.199.241:9000 \
-      #       -Dsonar.login=$SONAR_TOKEN \
-      #       -Dsonar.projectKey=netflix \
-      #       -Dsonar.projectName=netflix \
-      #       -Dsonar.sources=.
-
       - name: Run SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -97,13 +91,52 @@ jobs:
             -Dsonar.projectKey=netflix \
             -Dsonar.projectName=netflix \
             -Dsonar.sources=.
-
       
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: http://103.142.199.241:9000
+
+      
+      # - name: Install SonarScanner CLI
+      #   run: |
+      #     curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+      #     unzip -o sonar-scanner.zip -d $HOME
+      #     export SONAR_SCANNER_HOME=$HOME/sonar-scanner-5.0.1.3006-linux
+      #     echo "$SONAR_SCANNER_HOME/bin" >> $GITHUB_PATH
+      
+      # - name: Check SonarScanner Version
+      #   run: sonar-scanner --version || true
+      
+      # # - name: Run SonarQube Scan
+      # #   env:
+      # #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # #   run: |
+      # #     sonar-scanner \
+      # #       -Dsonar.host.url=http://103.142.199.241:9000 \
+      # #       -Dsonar.login=$SONAR_TOKEN \
+      # #       -Dsonar.projectKey=netflix \
+      # #       -Dsonar.projectName=netflix \
+      # #       -Dsonar.sources=.
+
+      # - name: Run SonarQube Scan
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     sonar-scanner -X \
+      #       -Dsonar.host.url=http://103.142.199.241:9000 \
+      #       -Dsonar.login=$SONAR_TOKEN \
+      #       -Dsonar.projectKey=netflix \
+      #       -Dsonar.projectName=netflix \
+      #       -Dsonar.sources=.
+
+      
+      # - name: SonarQube Quality Gate
+      #   uses: SonarSource/sonarqube-quality-gate-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: http://103.142.199.241:9000
 
 
   
