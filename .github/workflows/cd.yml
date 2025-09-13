@@ -34,7 +34,7 @@ jobs:
       - name: Update Kubernetes manifests
         run: |
           cd Kubernetes
-          sed -i "s|shailesh49/netflix:[^\"']*|${{ github.event.inputs.REPO_IMAGE }}|g" deployment.yml
+          sed -i "s|pankaj6262/mynetflix:[^\"']*|${{ github.event.inputs.REPO_IMAGE }}|g" deployment.yml
 
       - name: Commit & Push changes
         run: |
