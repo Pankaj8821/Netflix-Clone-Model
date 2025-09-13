@@ -78,16 +78,28 @@ jobs:
           sonar-scanner --version
           ls -l $HOME/sonar-scanner-5.0.1.3006-linux/lib | grep logback
       
+      # - name: Run SonarQube Scan
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     sonar-scanner \
+      #       -Dsonar.host.url=http://103.142.199.241:9000 \
+      #       -Dsonar.login=$SONAR_TOKEN \
+      #       -Dsonar.projectKey=netflix \
+      #       -Dsonar.projectName=netflix \
+      #       -Dsonar.sources=.
+
       - name: Run SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner \
+          sonar-scanner -X \
             -Dsonar.host.url=http://103.142.199.241:9000 \
             -Dsonar.login=$SONAR_TOKEN \
             -Dsonar.projectKey=netflix \
             -Dsonar.projectName=netflix \
             -Dsonar.sources=.
+
       
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@master
