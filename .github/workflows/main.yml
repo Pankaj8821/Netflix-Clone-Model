@@ -72,7 +72,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
         with:
           args: >
-            -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
+            -Dsonar.host.url=http://103.142.199.241:9000   # replace with your SonarQube server
             -Dsonar.projectKey=netflix             
             -Dsonar.projectName=netflix             
             -Dsonar.sources=.
@@ -81,7 +81,7 @@ jobs:
         uses: SonarSource/sonarqube-quality-gate-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonar-server
+          SONAR_HOST_URL: http://103.142.199.241:9000
 
       # Build Docker Images 
       - name: Build Docker Image
