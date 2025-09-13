@@ -60,38 +60,44 @@ jobs:
 
 
      # 2 Setup JDK (SonarQube Scanner needs Java)
-      - name: Setup JDK
-        uses: actions/setup-java@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: '17'
-      #  SonarQube Analysis
-      - name: SonarQube Analysis
-        uses: SonarSource/sonarcloud-github-action@master
+
+      - name: Install SonarScanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip sonar-scanner.zip -d $HOME
+          echo "$HOME/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
+
+      - name: Run SonarQube Scan
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
-        with:
-          args: >
-            -Dsonar.host.url=http://103.142.199.241:9000   # replace with your SonarQube server
-            -Dsonar.projectKey=netflix             
-            -Dsonar.projectName=netflix             
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.host.url=http://103.142.199.241:9000 \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.projectKey=netflix \
+            -Dsonar.projectName=netflix \
             -Dsonar.sources=.
-      # ---- SonarQube Quality Gate Check ---
+
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: http://103.142.199.241:9000
-
-      # Build Docker Images 
+  
+        # Build Docker Images 
       - name: Build Docker Image
         run: docker build -t ${{ env.REPO_IMAGE }} .
-       #  Setup Trivy
+         #  Setup Trivy
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.4
         with:
-         version: v0.66.0   # Optional: pin to a specific Trivy version
-         cache: true        # Optional: enable caching
+          version: v0.66.0   # Optional: pin to a specific Trivy version
+          cache: true        # Optional: enable caching
 
       # -------- Trivy --------
       # - name: Install Trivy
