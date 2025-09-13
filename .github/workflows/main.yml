@@ -80,17 +80,28 @@ jobs:
       
       - name: Check SonarScanner Version
         run: sonar-scanner --version
-      
-      - name: Run SonarQube Scan pankaj
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=netflix
+            -Dsonar.projectName=netflix
+            -Dsonar.sources=.
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner -X \
-            -Dsonar.host.url=http://103.142.199.241:9000 \
-            -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.projectKey=netflix \
-            -Dsonar.projectName=netflix \
-            -Dsonar.sources=.
+          SONAR_HOST_URL: http://103.142.199.241:9000
+
+      
+      # - name: Run SonarQube Scan pankaj
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     sonar-scanner -X \
+      #       -Dsonar.host.url=http://103.142.199.241:9000 \
+      #       -Dsonar.login=$SONAR_TOKEN \
+      #       -Dsonar.projectKey=netflix \
+      #       -Dsonar.projectName=netflix \
+      #       -Dsonar.sources=.
       
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@master
