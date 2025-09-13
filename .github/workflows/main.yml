@@ -81,7 +81,7 @@ jobs:
       - name: Check SonarScanner Version
         run: sonar-scanner --version
       
-      - name: Run SonarQube Scan
+      - name: Run SonarQube Scan pankaj
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
