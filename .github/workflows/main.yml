@@ -65,13 +65,19 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Install SonarScanner
+      
+      - name: Install SonarScanner CLI
         run: |
           curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
           unzip sonar-scanner.zip -d $HOME
-          echo "$HOME/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
-
+          export SONAR_SCANNER_HOME=$HOME/sonar-scanner-5.0.1.3006-linux
+          echo "$SONAR_SCANNER_HOME/bin" >> $GITHUB_PATH
+      
+      - name: Verify SonarScanner installation
+        run: |
+          sonar-scanner --version
+          ls -l $HOME/sonar-scanner-5.0.1.3006-linux/lib | grep logback
+      
       - name: Run SonarQube Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -82,12 +88,14 @@ jobs:
             -Dsonar.projectKey=netflix \
             -Dsonar.projectName=netflix \
             -Dsonar.sources=.
-
+      
       - name: SonarQube Quality Gate
         uses: SonarSource/sonarqube-quality-gate-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: http://103.142.199.241:9000
+
+
   
         # Build Docker Images 
       - name: Build Docker Image
