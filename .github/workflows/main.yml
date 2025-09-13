@@ -17,8 +17,8 @@ permissions:
 
 env:
   IMAGE_NAME: netflix:${{ github.run_number }}
-  REPO_IMAGE: shailesh49/netflix:${{ github.run_number }}
-  REPO_IMAGE_LATEST: shailesh49/netflix:latest
+  REPO_IMAGE: pankaj6262/netflix:${{ github.run_number }}
+  REPO_IMAGE_LATEST: pankaj6262/netflix:latest
   DOCKER_SCOUT_CACHE_DIR: /tmp/docker-scout-cache
   SCOUT_BIN: ${{ github.workspace }}/.scout-bin
 
@@ -59,29 +59,29 @@ jobs:
           path: reports/**
 
 
-      # 2 Setup JDK (SonarQube Scanner needs Java)
-      # - name: Setup JDK
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     distribution: temurin
-      #     java-version: '17'
-      # #  SonarQube Analysis
-      # - name: SonarQube Analysis
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
-      #   with:
-      #     args: >
-      #       -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
-      #       -Dsonar.projectKey=netflix             
-      #       -Dsonar.projectName=netflix             
-      #       -Dsonar.sources=.
-      # # ---- SonarQube Quality Gate Check ---
-      # - name: SonarQube Quality Gate
-      #   uses: SonarSource/sonarqube-quality-gate-action@master
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #     SONAR_HOST_URL: https://sonar-server
+     # 2 Setup JDK (SonarQube Scanner needs Java)
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      #  SonarQube Analysis
+      - name: SonarQube Analysis
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # same as sonar-token in Jenkins
+        with:
+          args: >
+            -Dsonar.host.url=https://sonar-server   # replace with your SonarQube server
+            -Dsonar.projectKey=netflix             
+            -Dsonar.projectName=netflix             
+            -Dsonar.sources=.
+      # ---- SonarQube Quality Gate Check ---
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonar-server
 
       # Build Docker Images 
       - name: Build Docker Image
