@@ -149,7 +149,7 @@ jobs:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       #     SONAR_HOST_URL: http://103.142.199.241:9000
 
-
+ 
   
         # Build Docker Images 
       - name: Build Docker Image
