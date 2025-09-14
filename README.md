@@ -3,7 +3,7 @@
     <img src="./public/assets/netflix-logo.png" alt="Logo" width="100" height="32">
   </a>
 
-  <h3 align="center">Netflix my file pratik pratik </h3>
+  <h3 align="center">Netflix</h3>
 
   <p align="center">
     <a href="https://netflix-clone-react-typescript.vercel.app/">View Demo aaaaaaaaaaaaaaaaaa</a>
